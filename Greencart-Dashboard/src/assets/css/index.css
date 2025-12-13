@@ -1,0 +1,31 @@
+.index {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.index-left {
+    width: 250px;
+    background-color: #00c200;
+    color: white;
+}
+
+.index-right {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 100%;
+}
+
+.index-header {
+    height: 100px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #ddd;
+}
+
+.index-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    background-color: #f4f6f8;
+}

@@ -1,0 +1,99 @@
+.header-wrapper {
+    background-color: #ffffff;
+    padding: 0 30px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.header-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-search {
+    display: flex;
+    align-items: center;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 500px;
+    height: 45px;
+}
+
+.header-search input {
+    border: none;
+    background: transparent;
+    padding: 0 15px;
+    width: 100%;
+    font-size: 14px;
+    color: #4a5568;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+}
+
+.search-btn {
+    background-color: #ff9f43;
+    border: none;
+    height: 100%;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.search-btn i {
+    color: white;
+    font-size: 18px;
+}
+
+.search-btn:hover {
+    background-color: #e68a30;
+}
+
+.header-details {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.profile-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.profile-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.user-name {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #222;
+    font-family: 'Poppins', sans-serif;
+}
+
+.user-role {
+    font-size: 14px;
+    color: #777;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
