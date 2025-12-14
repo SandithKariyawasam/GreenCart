@@ -1,5 +1,7 @@
 import React from 'react';
 
+import img from '../../../assets/images/2.png'
+
 const OrderDetails = ({ onBack }) => {
     return (
         <div className="order-details-wrapper">
@@ -26,7 +28,7 @@ const OrderDetails = ({ onBack }) => {
                         <div className="details-body">
 
                             <div className="item-row">
-                                <img src="https://themes.pixelstrap.com/fastkart/assets/images/fashion/product/front/1.jpg" alt="" />
+                                <img src={img} alt="" />
                                 <div className="item-info">
                                     <h3>Outwear & Coats</h3>
                                 </div>
@@ -35,7 +37,7 @@ const OrderDetails = ({ onBack }) => {
                             </div>
 
                             <div className="item-row">
-                                <img src="https://themes.pixelstrap.com/fastkart/assets/images/fashion/product/front/2.jpg" alt="" />
+                                <img src={img} alt="" />
                                 <div className="item-info">
                                     <h3>Slim Fit Plastic Coat</h3>
                                 </div>
@@ -44,7 +46,7 @@ const OrderDetails = ({ onBack }) => {
                             </div>
 
                             <div className="item-row">
-                                <img src="https://themes.pixelstrap.com/fastkart/assets/images/fashion/product/front/3.jpg" alt="" />
+                                <img src={img} alt="" />
                                 <div className="item-info">
                                     <h3>Men's Sweatshirt</h3>
                                 </div>

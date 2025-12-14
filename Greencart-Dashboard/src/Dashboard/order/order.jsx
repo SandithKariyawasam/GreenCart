@@ -3,6 +3,8 @@ import './order.css';
 import TrackOrder from './components/trackorder';
 import OrderDetails from './components/orderdetails';
 
+import img from '../../assets/images/2.png'
+
 const Order = () => {
     const [currentView, setCurrentView] = useState('list'); // 'list', 'track', 'details'
     const [selectedOrder, setSelectedOrder] = useState(null);
@@ -11,7 +13,7 @@ const Order = () => {
     const [orders] = useState([
         {
             id: 1,
-            image: 'https://themes.pixelstrap.com/fastkart/assets/images/grocery/product/1.jpg',
+            image: img,
             code: '406-4883635',
             date: 'Jul 20, 2022',
             method: 'Paypal',
@@ -20,7 +22,7 @@ const Order = () => {
         },
         {
             id: 2,
-            image: 'https://themes.pixelstrap.com/fastkart/assets/images/grocery/product/2.jpg',
+            image: img,
             code: '573-685572',
             date: 'Jul 25, 2022',
             method: 'Paypal',
@@ -29,7 +31,7 @@ const Order = () => {
         },
         {
             id: 3,
-            image: 'https://themes.pixelstrap.com/fastkart/assets/images/grocery/product/3.jpg',
+            image: img,
             code: '759-4568734',
             date: 'Jul 29, 2022',
             method: 'Stripe',
@@ -38,7 +40,7 @@ const Order = () => {
         },
         {
             id: 4,
-            image: 'https://themes.pixelstrap.com/fastkart/assets/images/grocery/product/4.jpg',
+            image: img,
             code: '546-7664537',
             date: 'Jul 30, 2022',
             method: 'Paypal',
@@ -47,7 +49,7 @@ const Order = () => {
         },
         {
             id: 5,
-            image: 'https://themes.pixelstrap.com/fastkart/assets/images/grocery/product/5.jpg',
+            image: img,
             code: '456-1245789',
             date: 'Aug 10, 2022',
             method: 'Stripe',

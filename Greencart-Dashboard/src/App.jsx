@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import './App.css'
 
@@ -8,7 +9,9 @@ function App() {
 
   return (
     <>
-      <Dashboard />
+      <BrowserRouter>
+        <Dashboard />
+      </BrowserRouter>
     </>
   )
 }

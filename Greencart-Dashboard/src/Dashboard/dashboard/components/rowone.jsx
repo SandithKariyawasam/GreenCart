@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import ReactApexChart from 'react-apexcharts'
 
+import img from '../../../assets/images/2.png'
+
 const Rowone = () => {
 
     const [filterText, setFilterText] = useState('Today');
@@ -109,7 +111,7 @@ const Rowone = () => {
                                     <div className="product-wrapper">
                                         <div className="img-box">
                                             {/* Replace with actual image */}
-                                            <img src="https://themes.pixelstrap.com/fastkart/assets/images/grocery/product/1.jpg" alt="product" />
+                                            <img src={img} alt="product" />
                                         </div>
                                         <div className="product-details">
                                             <h6>Aata Biscuit</h6>
@@ -140,7 +142,7 @@ const Rowone = () => {
                                 <td>
                                     <div className="product-wrapper">
                                         <div className="img-box">
-                                            <img src="https://themes.pixelstrap.com/fastkart/assets/images/grocery/product/2.jpg" alt="product" />
+                                            <img src={img} alt="product" />
                                         </div>
                                         <div className="product-details">
                                             <h6>Snack Packet</h6>
@@ -171,7 +173,7 @@ const Rowone = () => {
                                 <td>
                                     <div className="product-wrapper">
                                         <div className="img-box">
-                                            <img src="https://themes.pixelstrap.com/fastkart/assets/images/grocery/product/3.jpg" alt="product" />
+                                    <img src={img} alt="product" />
                                         </div>
                                         <div className="product-details">
                                             <h6>Orange Juice</h6>

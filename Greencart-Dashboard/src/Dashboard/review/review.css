@@ -1,0 +1,124 @@
+/* --- Page Layout --- */
+.review-page {
+    padding: 30px;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+}
+
+.review-container {
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.03);
+}
+
+.review-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 900px;
+}
+
+.review-table th {
+    background-color: #f8f8f8;
+    padding: 15px 20px;
+    text-align: left;
+    font-size: 14px;
+    color: #333;
+    font-weight: 600;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.review-table td {
+    padding: 15px 20px;
+    border-bottom: 1px solid #f4f4f4;
+    vertical-align: middle;
+    font-size: 14px;
+    color: #555;
+    text-align: center;
+}
+
+.review-table tr:last-child td {
+    border-bottom: none;
+}
+
+.fw-500 {
+    font-weight: 500;
+    color: #222;
+}
+
+.comment-text {
+    color: #777;
+    max-width: 300px;
+}
+
+.rating-box {
+    display: flex;
+    gap: 2px;
+    justify-content: center;
+}
+
+.star-gold {
+    color: #ffa800;
+}
+
+.star-gray {
+    color: #e2e2e2;
+}
+
+.status-circle {
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.status-circle.success {
+    color: #0da487;
+}
+
+.status-circle.danger {
+    color: #ff4f4f;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-action {
+    border: none;
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-action.accept {
+    background-color: rgba(13, 164, 135, 0.1);
+    color: #0da487;
+    border: 1px solid transparent;
+}
+
+.btn-action.accept:hover {
+    background-color: #0da487;
+    color: #fff;
+}
+
+.btn-action.reject {
+    background-color: rgba(255, 79, 79, 0.1);
+    color: #ff4f4f;
+    border: 1px solid transparent;
+}
+
+.btn-action.reject:hover {
+    background-color: #ff4f4f;
+    color: #fff;
+}
+
+.text-center {
+    text-align: center;
+}

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import img from '../../../assets/images/2.png'
+
 const TrackOrder = ({ onBack }) => {
     return (
         <div className="track-order-wrapper">
@@ -13,7 +15,7 @@ const TrackOrder = ({ onBack }) => {
                 {/* Top Product Info */}
                 <div className="track-header">
                     <div className="track-img">
-                        <img src="https://themes.pixelstrap.com/fastkart/assets/images/fashion/product/front/1.jpg" alt="product" />
+                        <img src={img} alt="product" />
                     </div>
                     <div className="track-details">
                         <h4>Van Heusen Men's Solid Regular Fit Polo</h4>

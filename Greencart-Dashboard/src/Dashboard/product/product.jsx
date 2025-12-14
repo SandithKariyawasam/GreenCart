@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import './product.css'
-// Import your new component
+
+import img from '../../assets/images/2.png'
+
 import AddProduct from './components/addproduct' 
 
 const Product = () => {
@@ -9,12 +11,12 @@ const Product = () => {
 
   // --- Mock Data ---
   const [products] = useState([
-    { id: 1, img: 'https://themes.pixelstrap.com/fastkart/assets/images/grocery/product/1.jpg', name: 'Aata Biscuit', category: 'Biscuit', qty: 12, price: '$95.97', status: 'Pending' },
-    { id: 2, img: 'https://themes.pixelstrap.com/fastkart/assets/images/grocery/product/2.jpg', name: 'Cold Brew Coffee', category: 'Drinks', qty: 10, price: '$95.97', status: 'Approved' },
-    { id: 3, img: 'https://themes.pixelstrap.com/fastkart/assets/images/grocery/product/3.jpg', name: 'Peanut Butter Cookies', category: 'Cookies', qty: 9, price: '$86.35', status: 'Approved' },
-    { id: 4, img: 'https://themes.pixelstrap.com/fastkart/assets/images/grocery/product/4.jpg', name: 'Wheet Flakes', category: 'Flakes', qty: 8, price: '$95.97', status: 'Pending' },
-    { id: 5, img: 'https://themes.pixelstrap.com/fastkart/assets/images/grocery/product/5.jpg', name: 'Potato Chips', category: 'Chips', qty: 23, price: '$95.97', status: 'Approved' },
-    { id: 6, img: 'https://themes.pixelstrap.com/fastkart/assets/images/grocery/product/6.jpg', name: 'Tuwer Dal', category: 'Dals', qty: 50, price: '$95.97', status: 'Approved' }
+    { id: 1, img: img, name: 'Aata Biscuit', category: 'Biscuit', qty: 12, price: '$95.97', status: 'Pending' },
+    { id: 2, img: img, name: 'Cold Brew Coffee', category: 'Drinks', qty: 10, price: '$95.97', status: 'Approved' },
+    { id: 3, img: img, name: 'Peanut Butter Cookies', category: 'Cookies', qty: 9, price: '$86.35', status: 'Approved' },
+    { id: 4, img: img, name: 'Wheet Flakes', category: 'Flakes', qty: 8, price: '$95.97', status: 'Pending' },
+    { id: 5, img: img, name: 'Potato Chips', category: 'Chips', qty: 23, price: '$95.97', status: 'Approved' },
+    { id: 6, img: img, name: 'Tuwer Dal', category: 'Dals', qty: 50, price: '$95.97', status: 'Approved' }
   ]);
 
   const [searchTerm, setSearchTerm] = useState('');

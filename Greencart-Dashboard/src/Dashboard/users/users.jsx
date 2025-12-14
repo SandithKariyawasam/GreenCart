@@ -2,13 +2,15 @@ import React, { useState } from 'react'
 import './users.css'
 import AddUser from './components/adduser'
 
+import img from '../../assets/images/me2.jpeg'
+
 const Users = () => {
     const [showAddForm, setShowAddForm] = useState(false);
 
     const [users] = useState([
         {
             id: 1,
-            img: 'https://themes.pixelstrap.com/fastkart/assets/images/users/1.jpg',
+            img: img,
             name: 'Everett C. Green',
             subtext: 'Essex Court',
             phone: '+ 802-370-2430',
@@ -16,7 +18,7 @@ const Users = () => {
         },
         {
             id: 2,
-            img: 'https://themes.pixelstrap.com/fastkart/assets/images/users/2.jpg',
+            img: img,
             name: 'Caroline L. Harris',
             subtext: 'Davis Lane',
             phone: '+ 720-276-9403',
@@ -24,7 +26,7 @@ const Users = () => {
         },
         {
             id: 3,
-            img: 'https://themes.pixelstrap.com/fastkart/assets/images/users/3.jpg',
+            img: img,
             name: 'Lucy j. Morile',
             subtext: 'Clifton',
             phone: '+ 351-756-6549',
@@ -32,7 +34,7 @@ const Users = () => {
         },
         {
             id: 4,
-            img: 'https://themes.pixelstrap.com/fastkart/assets/images/users/4.jpg',
+            img: img,
             name: 'Jennifer A. Straight',
             subtext: 'Brunswick',
             phone: '+ 912-265-1550',
@@ -40,7 +42,7 @@ const Users = () => {
         },
         {
             id: 5,
-            img: 'https://themes.pixelstrap.com/fastkart/assets/images/users/5.jpg',
+            img: img,
             name: 'Louise J. Stiles',
             subtext: 'Indianapolis',
             phone: '+ 304-921-8122',
