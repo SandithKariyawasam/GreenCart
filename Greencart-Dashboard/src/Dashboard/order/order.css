@@ -1,0 +1,196 @@
+/* --- Global Order Page Styles --- */
+.order-page, .track-order-wrapper, .order-details-wrapper {
+    padding: 30px;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+}
+
+.order-container {
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.03);
+}
+
+/* --- Table Styles (Shared) --- */
+.order-table, .track-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+}
+
+.order-table th, .track-table th {
+    padding: 15px 20px;
+    text-align: left;
+    background-color: #f8f8f8;
+    color: #333;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.order-table td, .track-table td {
+    padding: 15px 20px;
+    border-bottom: 1px solid #f4f4f4;
+    vertical-align: middle;
+    color: #555;
+    font-size: 14px;
+}
+
+.o-date { color: #0da487; }
+.o-amount { font-weight: 600; color: #222; }
+
+/* Status Badges */
+.status-badge {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 600;
+}
+.status-badge.success { background-color: rgba(13, 164, 135, 0.1); color: #0da487; }
+.status-badge.pending { background-color: #eee; color: #777; }
+.status-badge.cancel { background-color: rgba(255, 79, 79, 0.1); color: #ff4f4f; }
+
+/* Track Button */
+.track-btn {
+    background-color: #0da487;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+/* --- Tracking Page Styles --- */
+.track-header {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+.track-img {
+    width: 200px;
+    height: 150px;
+    background: #f9f9f9;
+    display: flex; align-items: center; justify-content: center;
+}
+.track-img img { max-width: 100%; max-height: 100%; }
+.track-details h4 { margin: 0 0 10px; color: #222; }
+.track-details p { margin: 5px 0; font-size: 14px; color: #777; }
+.text-dark { color: #222; font-weight: 600; }
+
+/* Progress Bar */
+.track-progress-bar ul {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    padding: 0;
+    position: relative;
+    margin-top: 30px;
+}
+.track-progress-bar ul::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: #eee;
+    z-index: 0;
+}
+.track-progress-bar li {
+    position: relative;
+    text-align: center;
+    z-index: 1;
+    background-color: #fff; /* to hide line behind icon */
+    padding: 0 10px;
+}
+.track-progress-bar .step-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #eee;
+    margin: 0 auto 10px;
+    display: flex; align-items: center; justify-content: center;
+    color: white;
+}
+.track-progress-bar li.active .step-icon {
+    background-color: #0da487;
+}
+/* Connect active lines */
+.track-progress-bar li.active ~ li.active::after {
+   /* Complex CSS logic needed for filling line, sticking to icons for now */
+}
+.track-progress-bar span { display: block; font-weight: 600; color: #222; font-size: 14px; }
+.track-progress-bar small { color: #999; font-size: 12px; }
+
+
+/* --- Order Details Styles --- */
+.order-meta-bar {
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 20px;
+    color: #777;
+    font-size: 14px;
+}
+.order-meta-bar span { margin-right: 20px; }
+
+.details-grid {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+.details-left { flex: 2; min-width: 400px; }
+.details-right { flex: 1; min-width: 300px; }
+
+.details-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.card-header-green {
+    background-color: #0da487;
+    color: white;
+    padding: 15px 20px;
+    display: flex; justify-content: space-between; align-items: center;
+}
+.card-header-green h5 { margin: 0; font-size: 16px; }
+.edit-link { font-size: 12px; cursor: pointer; }
+
+.item-row {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #f4f4f4;
+}
+.item-row img { width: 100px; height: 100px; margin-right: 20px; object-fit: contain; }
+.item-info { flex: 1; }
+.item-info h3 { margin: 0; color: #222; }
+.item-qty, .item-price { width: 80px; text-align: right; font-weight: 500; color: #555; }
+
+/* Summary Footer */
+.summary-footer { padding: 20px; }
+.summary-row {
+    display: flex; justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 14px; color: #555;
+}
+.summary-row.total {
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+    font-weight: 700;
+    color: #0da487;
+    font-size: 16px;
+}
+
+/* Sidebar */
+.sidebar-section {
+    margin-bottom: 25px;
+    border-bottom: 1px solid #f4f4f4;
+    padding-bottom: 15px;
+}
+.sidebar-section:last-child { border-bottom: none; }
+.sidebar-section h6 { font-size: 15px; margin-bottom: 10px; color: #222; }
+.sidebar-section p { font-size: 13px; color: #777; margin: 3px 0; line-height: 1.6; }
