@@ -3,6 +3,8 @@ package com.example.Greencart.controller;
 import com.example.Greencart.entity.User;
 import com.example.Greencart.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,27 +20,23 @@ public class AuthController {
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
             return "Error: Email already taken!";
         }
-
         user.setActive(true);
-
         userRepository.save(user);
-
         return "User registered successfully!";
     }
 
     @PostMapping("/login")
-    public String loginUser(@RequestBody User loginRequest) {
+    public ResponseEntity<?> loginUser(@RequestBody User loginRequest) {
         User user = userRepository.findByEmail(loginRequest.getEmail())
                 .orElse(null);
 
         if (user == null) {
-            return "Error: User not found!";
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Error: User not found!");
         }
 
-        if (!user.getPasswordHash().equals(loginRequest.getPasswordHash())) {
-            return "Error: Wrong password!";
+        if (user.getPasswordHash() == null || !user.getPasswordHash().equals(loginRequest.getPasswordHash())) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Error: Wrong password!");
         }
-
-        return "Login Successful! Welcome " + user.getFirstName();
+        return ResponseEntity.ok(user);
     }
 }

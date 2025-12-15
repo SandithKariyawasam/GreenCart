@@ -1,0 +1,120 @@
+/* Full Screen Container */
+.auth-container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f3f3f3; /* Light grey bg */
+}
+
+/* Login Card */
+.auth-card {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 450px;
+}
+
+/* Header Section */
+.auth-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.auth-logo {
+    max-width: 150px;
+    margin-bottom: 20px;
+}
+
+.auth-header h3 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 5px;
+}
+
+.auth-header p {
+    color: #777;
+    font-size: 14px;
+}
+
+/* Form Styles */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #444;
+}
+
+.form-group input {
+    padding: 12px 15px;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    font-size: 14px;
+    outline: none;
+    transition: border 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #0da487; /* Fastkart Green */
+    background-color: #fff;
+}
+
+/* Error Message */
+.error-message {
+    background-color: rgba(255, 79, 79, 0.1);
+    color: #ff4f4f;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 13px;
+    text-align: center;
+}
+
+/* Actions */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.forgot-link {
+    font-size: 13px;
+    color: #777;
+    text-decoration: none;
+}
+
+.forgot-link:hover {
+    color: #0da487;
+}
+
+/* Login Button */
+.login-btn {
+    background-color: #0da487;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 10px;
+}
+
+.login-btn:hover {
+    background-color: #0b8a71;
+}
