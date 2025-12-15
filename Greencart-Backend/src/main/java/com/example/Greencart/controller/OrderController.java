@@ -26,6 +26,20 @@ public class OrderController {
     @Autowired
     private CouponRepository couponRepository;
 
+    // 1. GET ALL ORDERS (Required for Admin Panel List)
+    @GetMapping
+    public List<Order> getAllOrders() {
+        return orderRepository.findAll();
+    }
+
+    // 2. GET SINGLE ORDER (Required for Order Details Page)
+    @GetMapping("/{id}")
+    public Order getOrderById(@PathVariable Long id) {
+        return orderRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Order not found with ID: " + id));
+    }
+
+    // 3. PLACE ORDER (For Checkout)
     @PostMapping("/place")
     public Order placeOrder(@RequestBody OrderRequest request) {
         User user = userRepository.findById(request.getUserId())
@@ -54,6 +68,7 @@ public class OrderController {
             totalAmount = totalAmount.add(lineTotal);
         }
 
+        // Coupon Logic
         if (request.getCouponCode() != null && !request.getCouponCode().isEmpty()) {
             Coupon coupon = couponRepository.findByCode(request.getCouponCode())
                     .orElseThrow(() -> new RuntimeException("Invalid Coupon Code!"));
@@ -73,17 +88,13 @@ public class OrderController {
         return orderRepository.save(order);
     }
 
+    // 4. GET USER ORDERS (For User History)
     @GetMapping("/user/{userId}")
     public List<Order> getUserOrders(@PathVariable Long userId) {
         return orderRepository.findByUserId(userId);
     }
 
-    @GetMapping("/{id}")
-    public Order getOrderById(@PathVariable Long id) {
-        return orderRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Order not found with ID: " + id));
-    }
-
+    // 5. UPDATE STATUS (For Admin Actions)
     @PutMapping("/{id}/status")
     public Order updateOrderStatus(@PathVariable Long id, @RequestBody String newStatus) {
         Order order = orderRepository.findById(id)
