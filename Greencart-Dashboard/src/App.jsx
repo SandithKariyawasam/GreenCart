@@ -25,25 +25,22 @@ const ProtectedRoute = ({ children }) => {
 function App() {
   return (
     <BrowserRouter>
-      
-        <Routes>
-          {/* Route 1: Login Page (Public) */}
-          <Route path="/" element={<Auth />} />
 
-          {/* Route 2: Dashboard (Private/Protected) */}
-          <Route
-            path="/dashboard/*"
-            element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            }
-          />
+      <Routes>
+        <Route path="/" element={<Auth />} />
 
-          {/* Optional: Catch all other paths and redirect to login */}
-          <Route path="*" element={<Navigate to="/" />} />
+        <Route
+          path="/dashboard/*"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
 
-        </Routes>
+        <Route path="*" element={<Navigate to="/" />} />
+
+      </Routes>
     </BrowserRouter>
   )
 }
