@@ -17,6 +17,8 @@ const AddUser = ({ editingUser, onFinish }) => {
     const [profileImage, setProfileImage] = useState(null);
     const [existingImageUrl, setExistingImageUrl] = useState(null);
 
+    const fileInputRef = useRef(null);
+
     useEffect(() => {
         if (editingUser) {
             setFormData({
@@ -83,6 +85,22 @@ const AddUser = ({ editingUser, onFinish }) => {
             alert("Failed to save user.");
         }
     };
+
+    const PermissionRow = ({ label, name }) => (
+        <div className="permission-row">
+            <span className="p-label">{label}</span>
+            <div className="p-options">
+                <label className="radio-label">
+                    <input type="radio" name={name} defaultChecked />
+                    <span className="custom-radio"></span> Allow
+                </label>
+                <label className="radio-label">
+                    <input type="radio" name={name} />
+                    <span className="custom-radio"></span> Deny
+                </label>
+            </div>
+        </div>
+    );
 
     return (
         <div className="user-container">
@@ -159,8 +177,15 @@ const AddUser = ({ editingUser, onFinish }) => {
                 {activeTab === 'permission' && (
                     <div className="tab-content">
                         <div className="permission-section">
-                            <h5 className="card-title">Permissions</h5>
-                            <p>Permissions settings are here.</p>
+                            <h5 className="card-title">Product Related Permission</h5>
+                            <div className="permission-list">
+                                <PermissionRow label="Add Product" name="prod_add" />
+                                <PermissionRow label="Update Product" name="prod_update" />
+                                <PermissionRow label="Delete Product" name="prod_delete" />
+                            </div>
+                        </div>
+                        <div className="form-actions-right">
+                            <button className="add-btn">Save Permissions</button>
                         </div>
                     </div>
                 )}
