@@ -21,6 +21,8 @@ public class Category {
 
     private String imageUrl;
 
+    private String icon;
+
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Product> products;
