@@ -1,64 +1,93 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import './product.css'
 
-import img from '../../assets/images/2.png'
-
-import AddProduct from './components/addproduct' 
+import defaultImg from '../../assets/images/2.png'
+import AddProduct from './components/addproduct'
 
 const Product = () => {
-  // --- State to toggle views ---
   const [showAddForm, setShowAddForm] = useState(false);
-
-  // --- Mock Data ---
-  const [products] = useState([
-    { id: 1, img: img, name: 'Aata Biscuit', category: 'Biscuit', qty: 12, price: '$95.97', status: 'Pending' },
-    { id: 2, img: img, name: 'Cold Brew Coffee', category: 'Drinks', qty: 10, price: '$95.97', status: 'Approved' },
-    { id: 3, img: img, name: 'Peanut Butter Cookies', category: 'Cookies', qty: 9, price: '$86.35', status: 'Approved' },
-    { id: 4, img: img, name: 'Wheet Flakes', category: 'Flakes', qty: 8, price: '$95.97', status: 'Pending' },
-    { id: 5, img: img, name: 'Potato Chips', category: 'Chips', qty: 23, price: '$95.97', status: 'Approved' },
-    { id: 6, img: img, name: 'Tuwer Dal', category: 'Dals', qty: 50, price: '$95.97', status: 'Approved' }
-  ]);
-
+  const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+
+  const [editingProduct, setEditingProduct] = useState(null);
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/api/products");
+      setProducts(response.data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    if (window.confirm("Are you sure you want to delete this product?")) {
+      try {
+        await axios.delete(`http://localhost:8080/api/products/${id}`);
+        fetchProducts();
+        alert("Product deleted!");
+      } catch (error) {
+        console.error("Error deleting product:", error);
+        if (error.response && error.response.data) {
+          alert(error.response.data);
+        } else {
+          alert("Failed to delete product.");
+        }
+      }
+    }
+  };
+
+  const handleEdit = (product) => {
+    setEditingProduct(product);
+    setShowAddForm(true);
+  };
+
+  const handleAddNew = () => {
+    setEditingProduct(null);
+    setShowAddForm(true);
+  };
+
+  const handleBackToList = () => {
+    setShowAddForm(false);
+    setEditingProduct(null);
+    fetchProducts();
+  };
 
   const filteredProducts = products.filter(product =>
     product.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // --- Toggle Handler ---
-  const handleToggle = () => {
-    setShowAddForm(!showAddForm);
-  }
-
   return (
     <div className="product-page">
-      
-      {/* Header Section */}
+
       <div className="page-header">
-        {/* Dynamic Title */}
-        <h3>{showAddForm ? 'Add New Product' : 'Products List'}</h3>
-        
-        {/* Toggle Button Functionality */}
-        <button className="add-btn" onClick={handleToggle}>
+        <h3>{showAddForm ? (editingProduct ? 'Edit Product' : 'Add New Product') : 'Products List'}</h3>
+
+        {/* Toggle Button */}
+        <button className="add-btn" onClick={showAddForm ? handleBackToList : handleAddNew}>
           {showAddForm ? 'Back to List' : 'Add Product'}
         </button>
       </div>
 
-      {/* CONDITIONAL RENDERING */}
       {showAddForm ? (
-        // IF TRUE: Show AddProduct Component
-        <AddProduct />
+        <AddProduct
+          editingProduct={editingProduct}
+          onFinish={handleBackToList}
+        />
       ) : (
-        // IF FALSE: Show Product Table
         <div className="product-container">
-          
           <div className="table-controls">
             <div className="search-box">
               <label>Search:</label>
-              <input 
-                type="text" 
-                value={searchTerm} 
-                onChange={(e) => setSearchTerm(e.target.value)} 
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
           </div>
@@ -70,9 +99,8 @@ const Product = () => {
                   <th>Product Image</th>
                   <th>Product Name</th>
                   <th>Category</th>
-                  <th>Current Qty</th>
+                  <th>Unit</th>
                   <th>Price</th>
-                  <th>Status</th>
                   <th>Option</th>
                 </tr>
               </thead>
@@ -81,40 +109,36 @@ const Product = () => {
                   <tr key={item.id}>
                     <td>
                       <div className="table-img">
-                        <img src={item.img} alt={item.name} />
+                        <img src={item.imageUrl || defaultImg} alt={item.name} style={{ width: '50px', height: '50px', objectFit: 'cover', borderRadius: '5px' }} />
                       </div>
                     </td>
                     <td className="p-name">{item.name}</td>
-                    <td className="p-category">{item.category}</td>
-                    <td>{item.qty}</td>
-                    <td className="p-price">{item.price}</td>
-                    <td>
-                      <span className={`status-badge ${item.status.toLowerCase()}`}>
-                        {item.status}
-                      </span>
-                    </td>
+                    <td className="p-category">{item.category ? item.category.name : 'N/A'}</td>
+                    <td>{item.unit}</td>
+                    <td className="p-price">${item.price}</td>
                     <td>
                       <div className="action-icons">
                         <button className="icon-btn view"><i className="ri-eye-line"></i></button>
-                        <button className="icon-btn edit"><i className="ri-pencil-line"></i></button>
-                        <button className="icon-btn delete"><i className="ri-delete-bin-line"></i></button>
+
+                        {/* EDIT BUTTON */}
+                        <button className="icon-btn edit" onClick={() => handleEdit(item)}>
+                          <i className="ri-pencil-line"></i>
+                        </button>
+
+                        {/* DELETE BUTTON */}
+                        <button className="icon-btn delete" onClick={() => handleDelete(item.id)}>
+                          <i className="ri-delete-bin-line"></i>
+                        </button>
+
                       </div>
                     </td>
                   </tr>
                 ))}
-                {filteredProducts.length === 0 && (
-                  <tr>
-                    <td colSpan="7" className="text-center">No products found</td>
-                  </tr>
-                )}
               </tbody>
             </table>
           </div>
-
         </div>
       )}
-      {/* End Conditional Rendering */}
-
     </div>
   )
 }

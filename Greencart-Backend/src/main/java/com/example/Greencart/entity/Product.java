@@ -29,6 +29,8 @@ public class Product {
 
     private boolean active = true;
 
+    private String unit;
+
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;

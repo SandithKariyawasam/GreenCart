@@ -14,6 +14,9 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
+
 @RestController
 @RequestMapping("/api/products")
 @CrossOrigin(origins = "*")
@@ -44,12 +47,14 @@ public class ProductController {
             @RequestParam("description") String description,
             @RequestParam("price") BigDecimal price,
             @RequestParam("categoryId") Integer categoryId,
+            @RequestParam("unit") String unit,
             @RequestParam(value = "image", required = false) MultipartFile imageFile) throws IOException {
 
         Product product = new Product();
         product.setName(name);
         product.setDescription(description);
         product.setPrice(price);
+        product.setUnit(unit);
 
         Category category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new RuntimeException("Category not found"));
@@ -61,5 +66,46 @@ public class ProductController {
         }
 
         return productRepository.save(product);
+    }
+
+    @PutMapping("/{id}")
+    public Product updateProduct(
+            @PathVariable Long id,
+            @RequestParam("name") String name,
+            @RequestParam("description") String description,
+            @RequestParam("price") BigDecimal price,
+            @RequestParam("categoryId") Integer categoryId,
+            @RequestParam("unit") String unit,
+            @RequestParam(value = "image", required = false) MultipartFile imageFile) throws IOException {
+
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+
+        product.setName(name);
+        product.setDescription(description);
+        product.setPrice(price);
+        product.setUnit(unit);
+
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new RuntimeException("Category not found"));
+        product.setCategory(category);
+
+        if (imageFile != null && !imageFile.isEmpty()) {
+            String imageUrl = cloudinaryService.uploadImage(imageFile);
+            product.setImageUrl(imageUrl);
+        }
+
+        return productRepository.save(product);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteProduct(@PathVariable Long id) {
+        try {
+            productRepository.deleteById(id);
+            return ResponseEntity.ok("Product deleted successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Cannot delete this product because it is part of an existing order.");
+        }
     }
 }
