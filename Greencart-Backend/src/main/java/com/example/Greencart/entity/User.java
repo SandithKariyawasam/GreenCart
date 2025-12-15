@@ -40,6 +40,8 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Address> addresses;
 
+    private String imageUrl;
+
     @CreationTimestamp
     private LocalDateTime createdAt;
 

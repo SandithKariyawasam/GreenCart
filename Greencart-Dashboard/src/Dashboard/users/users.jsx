@@ -1,80 +1,82 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import './users.css'
 import AddUser from './components/adduser'
-
-import img from '../../assets/images/me2.jpeg'
+import defaultImg from '../../assets/images/me2.jpeg'
 
 const Users = () => {
     const [showAddForm, setShowAddForm] = useState(false);
-
-    const [users] = useState([
-        {
-            id: 1,
-            img: img,
-            name: 'Everett C. Green',
-            subtext: 'Essex Court',
-            phone: '+ 802-370-2430',
-            email: 'EverettCGreen@rhyta.com'
-        },
-        {
-            id: 2,
-            img: img,
-            name: 'Caroline L. Harris',
-            subtext: 'Davis Lane',
-            phone: '+ 720-276-9403',
-            email: 'CarolineLHarris@rhyta.com'
-        },
-        {
-            id: 3,
-            img: img,
-            name: 'Lucy j. Morile',
-            subtext: 'Clifton',
-            phone: '+ 351-756-6549',
-            email: 'LucyMorile456@gmail.com'
-        },
-        {
-            id: 4,
-            img: img,
-            name: 'Jennifer A. Straight',
-            subtext: 'Brunswick',
-            phone: '+ 912-265-1550',
-            email: 'JenniferAStraight@rhyta.com'
-        },
-        {
-            id: 5,
-            img: img,
-            name: 'Louise J. Stiles',
-            subtext: 'Indianapolis',
-            phone: '+ 304-921-8122',
-            email: 'KevinAMillett@jourrapide.com'
-        }
-    ]);
-
+    const [users, setUsers] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
 
-    const filteredUsers = users.filter(user =>
-        user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        user.email.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const [editingUser, setEditingUser] = useState(null);
+
+    useEffect(() => {
+        fetchUsers();
+    }, []);
+
+    const fetchUsers = async () => {
+        try {
+            const response = await axios.get("http://localhost:8080/api/users");
+            setUsers(response.data);
+        } catch (error) {
+            console.error("Error fetching users:", error);
+        }
+    };
+
+    const handleDelete = async (id) => {
+        if (window.confirm("Are you sure you want to delete this user?")) {
+            try {
+                await axios.delete(`http://localhost:8080/api/users/${id}`);
+                fetchUsers();
+                alert("User deleted!");
+            } catch (error) {
+                console.error("Error deleting user:", error);
+                alert("Failed to delete user.");
+            }
+        }
+    };
+
+    const handleEdit = (user) => {
+        setEditingUser(user);
+        setShowAddForm(true);
+    };
+
+    const handleAddNew = () => {
+        setEditingUser(null);
+        setShowAddForm(true);
+    };
+
+    const handleBack = () => {
+        setShowAddForm(false);
+        setEditingUser(null);
+        fetchUsers();
+    };
+
+    const filteredUsers = users.filter(user => {
+        const fullName = `${user.firstName || ''} ${user.lastName || ''}`.toLowerCase();
+        return fullName.includes(searchTerm.toLowerCase());
+    });
 
     return (
         <div className="users-page">
 
             <div className="page-header">
-                <h3>{showAddForm ? 'Add New User' : 'All Users'}</h3>
+                <h3>{showAddForm ? (editingUser ? 'Edit User' : 'Add New User') : 'All Users'}</h3>
 
-                <button className="add-btn" onClick={() => setShowAddForm(!showAddForm)}>
+                {/* Toggle Button */}
+                <button className="add-btn" onClick={showAddForm ? handleBack : handleAddNew}>
                     {showAddForm ? 'Back to List' : '+ Add New'}
                 </button>
             </div>
 
-            {/* --- CONDITIONAL RENDERING --- */}
             {showAddForm ? (
-
-                <AddUser />
-
+                // Pass editingUser and onFinish prop to child
+                <AddUser
+                    editingUser={editingUser}
+                    onFinish={handleBack}
+                />
             ) : (
-
                 <div className="user-container">
                     <div className="table-controls">
                         <div className="search-box">
@@ -103,38 +105,39 @@ const Users = () => {
                                     <tr key={user.id}>
                                         <td>
                                             <div className="table-avatar">
-                                                <img src={user.img} alt={user.name} />
+                                                <img src={user.profileImageUrl || defaultImg} alt="avatar" style={{ objectFit: 'cover' }} />
                                             </div>
                                         </td>
                                         <td>
                                             <div className="user-details">
-                                                <h6 className="u-name">{user.name}</h6>
-                                                <span className="u-sub">{user.subtext}</span>
+                                                <h6 className="u-name">{user.firstName} {user.lastName}</h6>
+                                                <span className="u-sub">{user.role ? user.role.name : 'User'}</span>
                                             </div>
                                         </td>
-                                        <td className="u-phone">{user.phone}</td>
+                                        <td className="u-phone">{user.phoneNumber || '-'}</td>
                                         <td className="u-email">{user.email}</td>
                                         <td>
                                             <div className="action-icons">
                                                 <button className="icon-btn view"><i className="ri-eye-line"></i></button>
-                                                <button className="icon-btn edit"><i className="ri-pencil-line"></i></button>
-                                                <button className="icon-btn delete"><i className="ri-delete-bin-line"></i></button>
+
+                                                {/* EDIT BUTTON */}
+                                                <button className="icon-btn edit" onClick={() => handleEdit(user)}>
+                                                    <i className="ri-pencil-line"></i>
+                                                </button>
+
+                                                {/* DELETE BUTTON */}
+                                                <button className="icon-btn delete" onClick={() => handleDelete(user.id)}>
+                                                    <i className="ri-delete-bin-line"></i>
+                                                </button>
                                             </div>
                                         </td>
                                     </tr>
                                 ))}
-                                {filteredUsers.length === 0 && (
-                                    <tr>
-                                        <td colSpan="5" className="text-center">No users found</td>
-                                    </tr>
-                                )}
                             </tbody>
                         </table>
                     </div>
                 </div>
-
             )}
-
         </div>
     )
 }
