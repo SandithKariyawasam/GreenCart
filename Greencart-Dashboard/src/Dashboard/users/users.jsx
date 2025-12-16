@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom' // 1. Import useNavigate
 import './users.css'
 import AddUser from './components/adduser'
 import defaultImg from '../../assets/images/me2.jpeg'
 
 const Users = () => {
+    const navigate = useNavigate(); // 2. Initialize Hook
     const [showAddForm, setShowAddForm] = useState(false);
     const [users, setUsers] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
-
     const [editingUser, setEditingUser] = useState(null);
 
     useEffect(() => {
@@ -53,6 +54,12 @@ const Users = () => {
         fetchUsers();
     };
 
+    // 3. New Handler for View Button
+    const handleViewProfile = (user) => {
+        // Navigate to profile and pass the user object in 'state'
+        navigate('/dashboard/profile', { state: { user: user } });
+    };
+
     const filteredUsers = users.filter(user => {
         const fullName = `${user.firstName || ''} ${user.lastName || ''}`.toLowerCase();
         return fullName.includes(searchTerm.toLowerCase());
@@ -63,15 +70,12 @@ const Users = () => {
 
             <div className="page-header">
                 <h3>{showAddForm ? (editingUser ? 'Edit User' : 'Add New User') : 'All Users'}</h3>
-
-                {/* Toggle Button */}
                 <button className="add-btn" onClick={showAddForm ? handleBack : handleAddNew}>
                     {showAddForm ? 'Back to List' : '+ Add New'}
                 </button>
             </div>
 
             {showAddForm ? (
-                // Pass editingUser and onFinish prop to child
                 <AddUser
                     editingUser={editingUser}
                     onFinish={handleBack}
@@ -118,14 +122,15 @@ const Users = () => {
                                         <td className="u-email">{user.email}</td>
                                         <td>
                                             <div className="action-icons">
-                                                <button className="icon-btn view"><i className="ri-eye-line"></i></button>
+                                                {/* 4. Attach onClick handler to View Button */}
+                                                <button className="icon-btn view" onClick={() => handleViewProfile(user)}>
+                                                    <i className="ri-eye-line"></i>
+                                                </button>
 
-                                                {/* EDIT BUTTON */}
                                                 <button className="icon-btn edit" onClick={() => handleEdit(user)}>
                                                     <i className="ri-pencil-line"></i>
                                                 </button>
 
-                                                {/* DELETE BUTTON */}
                                                 <button className="icon-btn delete" onClick={() => handleDelete(user.id)}>
                                                     <i className="ri-delete-bin-line"></i>
                                                 </button>

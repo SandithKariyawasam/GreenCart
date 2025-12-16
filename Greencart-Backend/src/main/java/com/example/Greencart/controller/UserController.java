@@ -72,32 +72,68 @@ public class UserController {
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
-    // 3. UPDATE PROFILE
     @PutMapping("/{id}")
-    public User updateProfile(@PathVariable Long id, @RequestBody User userUpdates) {
+    public User updateProfile(
+            @PathVariable Long id,
+            @RequestParam(value = "firstName", required = false) String firstName,
+            @RequestParam(value = "lastName", required = false) String lastName,
+            @RequestParam(value = "phoneNumber", required = false) String phoneNumber,
+            @RequestParam(value = "password", required = false) String password,
+            @RequestParam(value = "image", required = false) MultipartFile imageFile) throws IOException {
+
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        if (userUpdates.getFirstName() != null)
-            user.setFirstName(userUpdates.getFirstName());
-        if (userUpdates.getLastName() != null)
-            user.setLastName(userUpdates.getLastName());
-        if (userUpdates.getPhoneNumber() != null)
-            user.setPhoneNumber(userUpdates.getPhoneNumber());
-        if (userUpdates.getProfileImageUrl() != null)
-            user.setProfileImageUrl(userUpdates.getProfileImageUrl());
+        if (firstName != null) user.setFirstName(firstName);
+        if (lastName != null) user.setLastName(lastName);
+        if (phoneNumber != null) user.setPhoneNumber(phoneNumber);
+
+        if (password != null && !password.isEmpty()) {
+            user.setPasswordHash(password);
+        }
+
+        if (imageFile != null && !imageFile.isEmpty()) {
+            String imageUrl = cloudinaryService.uploadImage(imageFile);
+            user.setProfileImageUrl(imageUrl);
+        }
 
         return userRepository.save(user);
     }
 
-    // 4. ADD ADDRESS
-    @PostMapping("/{id}/address")
-    public Address addAddress(@PathVariable Long id, @RequestBody Address address) {
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+    @PutMapping("/address/{addressId}")
+    public Address updateAddress(@PathVariable Long addressId, @RequestBody Address addressUpdates) {
+        Address address = addressRepository.findById(addressId)
+                .orElseThrow(() -> new RuntimeException("Address not found"));
 
-        address.setUser(user);
+        if (addressUpdates.getTitle() != null) {
+            address.setTitle(addressUpdates.getTitle());
+        }
+        if (addressUpdates.getAddressLine() != null) {
+            address.setAddressLine(addressUpdates.getAddressLine());
+        }
+        if (addressUpdates.getCity() != null) {
+            address.setCity(addressUpdates.getCity());
+        }
+        if (addressUpdates.getState() != null) {
+            address.setState(addressUpdates.getState());
+        }
+        if (addressUpdates.getZipCode() != null) {
+            address.setZipCode(addressUpdates.getZipCode());
+        }
+        if (addressUpdates.getCountry() != null) {
+            address.setCountry(addressUpdates.getCountry());
+        }
+        if (addressUpdates.getPhoneNumber() != null) {
+            address.setPhoneNumber(addressUpdates.getPhoneNumber());
+        }
+
         return addressRepository.save(address);
+    }
+
+    // 3. DELETE ADDRESS (New Method)
+    @DeleteMapping("/address/{addressId}")
+    public void deleteAddress(@PathVariable Long addressId) {
+        addressRepository.deleteById(addressId);
     }
 
     // 5. GET ADDRESSES
