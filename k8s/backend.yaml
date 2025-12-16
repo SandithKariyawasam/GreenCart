@@ -17,7 +17,15 @@ spec:
         image: swkariyawasam/greencart-backend:latest
         ports:
         - containerPort: 8080
-
+        env:
+          - name: SPRING_DATASOURCE_URL
+            value: "jdbc:postgresql://host.docker.internal:5432/greencart"
+          - name: SPRING_DATASOURCE_USERNAME
+            value: "postgres"  
+          - name: SPRING_DATASOURCE_PASSWORD
+            value: "admin" 
+          - name: SPRING_JPA_DATABASE_PLATFORM
+            value: "org.hibernate.dialect.PostgreSQLDialect"
 ---
 apiVersion: v1
 kind: Service
