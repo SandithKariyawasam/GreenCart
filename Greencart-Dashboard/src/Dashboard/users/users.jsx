@@ -18,7 +18,7 @@ const Users = () => {
 
     const fetchUsers = async () => {
         try {
-            const response = await axios.get("http://localhost:8080/api/users");
+            const response = await axios.get("https://166720c8-b530-49b2-b541-bf6a0cec22d8-prod.e1-us-east-azure.choreoapis.dev/greencart/greencart-backend/v1/api/users");
             setUsers(response.data);
         } catch (error) {
             console.error("Error fetching users:", error);
@@ -28,7 +28,7 @@ const Users = () => {
     const handleDelete = async (id) => {
         if (window.confirm("Are you sure you want to delete this user?")) {
             try {
-                await axios.delete(`http://localhost:8080/api/users/${id}`);
+                await axios.delete(`https://166720c8-b530-49b2-b541-bf6a0cec22d8-prod.e1-us-east-azure.choreoapis.dev/greencart/greencart-backend/v1/api/users/${id}`);
                 fetchUsers();
                 alert("User deleted!");
             } catch (error) {

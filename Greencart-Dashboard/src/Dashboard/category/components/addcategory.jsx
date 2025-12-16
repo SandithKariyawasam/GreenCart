@@ -60,12 +60,12 @@ const AddCategory = ({ editingCategory, onFinish }) => {
             }
 
             if (editingCategory) {
-                await axios.put(`http://localhost:8080/api/categories/${editingCategory.id}`, formData, {
+                await axios.put(`https://166720c8-b530-49b2-b541-bf6a0cec22d8-prod.e1-us-east-azure.choreoapis.dev/greencart/greencart-backend/v1/api/categories/${editingCategory.id}`, formData, {
                     headers: { "Content-Type": "multipart/form-data" },
                 });
                 alert("Category Updated!");
             } else {
-                await axios.post("http://localhost:8080/api/categories", formData, {
+                await axios.post("https://166720c8-b530-49b2-b541-bf6a0cec22d8-prod.e1-us-east-azure.choreoapis.dev/greencart/greencart-backend/v1/api/categories", formData, {
                     headers: { "Content-Type": "multipart/form-data" },
                 });
                 alert("Category Created!");

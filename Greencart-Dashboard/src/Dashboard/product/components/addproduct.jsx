@@ -20,7 +20,7 @@ const AddProduct = ({ editingProduct, onFinish }) => {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const response = await axios.get("http://localhost:8080/api/categories");
+                const response = await axios.get("https://166720c8-b530-49b2-b541-bf6a0cec22d8-prod.e1-us-east-azure.choreoapis.dev/greencart/greencart-backend/v1/api/categories");
                 setCategories(response.data);
                 if (!editingProduct && response.data.length > 0) {
                     setFormData(prev => ({ ...prev, categoryId: response.data[0].id }));
@@ -68,7 +68,7 @@ const AddProduct = ({ editingProduct, onFinish }) => {
             }
 
             if (editingProduct) {
-                await axios.put(`http://localhost:8080/api/products/${editingProduct.id}`, data, {
+                await axios.put(`https://166720c8-b530-49b2-b541-bf6a0cec22d8-prod.e1-us-east-azure.choreoapis.dev/greencart/greencart-backend/v1/api/products/${editingProduct.id}`, data, {
                     headers: { "Content-Type": "multipart/form-data" },
                 });
                 alert("Product Updated!");
@@ -76,7 +76,7 @@ const AddProduct = ({ editingProduct, onFinish }) => {
                 if (!thumbnailImage) { alert("Thumbnail is required for new products!"); return; }
                 data.append("image", thumbnailImage);
 
-                await axios.post("http://localhost:8080/api/products", data, {
+                await axios.post("https://166720c8-b530-49b2-b541-bf6a0cec22d8-prod.e1-us-east-azure.choreoapis.dev/greencart/greencart-backend/v1/api/products", data, {
                     headers: { "Content-Type": "multipart/form-data" },
                 });
                 alert("Product Added!");

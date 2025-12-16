@@ -25,8 +25,8 @@ const Header = () => {
               className="profile-img"
             />
             <div className="profile-info">
-              <h4 className="user-name">Emay Walter</h4>
-              <span className="user-role">Admin</span>
+              <h4 className="user-name">Sandith Kariyawasam</h4>
+              <span className="user-role">Super Admin</span>
             </div>
           </div>
         </div>

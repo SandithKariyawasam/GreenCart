@@ -33,7 +33,7 @@ const Rowone = () => {
     useEffect(() => {
         const fetchAnalytics = async () => {
             try {
-                const response = await axios.get("http://localhost:8080/api/dashboard/analytics");
+                const response = await axios.get("https://166720c8-b530-49b2-b541-bf6a0cec22d8-prod.e1-us-east-azure.choreoapis.dev/greencart/greencart-backend/v1/api/dashboard/analytics");
 
                 // Update Chart
                 setChartData(prev => ({

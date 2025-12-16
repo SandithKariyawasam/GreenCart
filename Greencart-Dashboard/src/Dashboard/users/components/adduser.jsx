@@ -62,7 +62,7 @@ const AddUser = ({ editingUser, onFinish }) => {
                     profileImageUrl: existingImageUrl
                 };
 
-                await axios.put(`http://localhost:8080/api/users/${editingUser.id}`, updateData);
+                await axios.put(`https://166720c8-b530-49b2-b541-bf6a0cec22d8-prod.e1-us-east-azure.choreoapis.dev/greencart/greencart-backend/v1/api/users/${editingUser.id}`, updateData);
                 alert("User Updated Successfully!");
 
             } else {
@@ -74,7 +74,7 @@ const AddUser = ({ editingUser, onFinish }) => {
                 data.append("phoneNumber", formData.phoneNumber);
                 if (profileImage) data.append("image", profileImage);
 
-                await axios.post("http://localhost:8080/api/users", data);
+                await axios.post("https://166720c8-b530-49b2-b541-bf6a0cec22d8-prod.e1-us-east-azure.choreoapis.dev/greencart/greencart-backend/v1/api/users", data);
                 alert("User Created Successfully!");
             }
 

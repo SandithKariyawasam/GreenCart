@@ -18,7 +18,7 @@ const Product = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/products");
+      const response = await axios.get("https://166720c8-b530-49b2-b541-bf6a0cec22d8-prod.e1-us-east-azure.choreoapis.dev/greencart/greencart-backend/v1/api/products");
       setProducts(response.data);
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -28,7 +28,7 @@ const Product = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this product?")) {
       try {
-        await axios.delete(`http://localhost:8080/api/products/${id}`);
+        await axios.delete(`https://166720c8-b530-49b2-b541-bf6a0cec22d8-prod.e1-us-east-azure.choreoapis.dev/greencart/greencart-backend/v1/api/products/${id}`);
         fetchProducts();
         alert("Product deleted!");
       } catch (error) {

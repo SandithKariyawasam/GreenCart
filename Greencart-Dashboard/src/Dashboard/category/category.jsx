@@ -16,7 +16,7 @@ const Category = () => {
 
     const fetchCategories = async () => {
         try {
-            const response = await axios.get("http://localhost:8080/api/categories");
+            const response = await axios.get("https://166720c8-b530-49b2-b541-bf6a0cec22d8-prod.e1-us-east-azure.choreoapis.dev/greencart/greencart-backend/v1/api/categories");
             setCategories(response.data);
         } catch (error) {
             console.error("Error fetching categories", error);
@@ -26,7 +26,7 @@ const Category = () => {
     const handleDelete = async (id) => {
         if (window.confirm("Are you sure you want to delete this category?")) {
             try {
-                await axios.delete(`http://localhost:8080/api/categories/${id}`);
+                await axios.delete(`https://166720c8-b530-49b2-b541-bf6a0cec22d8-prod.e1-us-east-azure.choreoapis.dev/greencart/greencart-backend/v1/api/categories/${id}`);
                 fetchCategories();
             } catch (error) {
                 console.error("Delete failed", error);

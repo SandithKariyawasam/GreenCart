@@ -38,7 +38,7 @@ const Profile = () => {
 
     const fetchAddresses = async () => {
         try {
-            const response = await axios.get(`http://localhost:8080/api/users/${displayUser.id}/address`);
+            const response = await axios.get(`https://166720c8-b530-49b2-b541-bf6a0cec22d8-prod.e1-us-east-azure.choreoapis.dev/greencart/greencart-backend/v1/api/users/${displayUser.id}/address`);
             setAddresses(response.data);
         } catch (error) {
             console.error("Error fetching addresses:", error);
@@ -74,7 +74,7 @@ const Profile = () => {
 
             // Send PUT request
             // Note: Axios automatically sets Content-Type to multipart/form-data
-            const response = await axios.put(`http://localhost:8080/api/users/${displayUser.id}`, data);
+            const response = await axios.put(`https://166720c8-b530-49b2-b541-bf6a0cec22d8-prod.e1-us-east-azure.choreoapis.dev/greencart/greencart-backend/v1/api/users/${displayUser.id}`, data);
             
             alert("Profile & Image Updated Successfully!");
             
@@ -119,7 +119,7 @@ const Profile = () => {
     // Save Address Update
     const saveAddress = async (id) => {
         try {
-            await axios.put(`http://localhost:8080/api/users/address/${id}`, editAddrData);
+            await axios.put(`https://166720c8-b530-49b2-b541-bf6a0cec22d8-prod.e1-us-east-azure.choreoapis.dev/greencart/greencart-backend/v1/api/users/address/${id}`, editAddrData);
             alert("Address updated!");
             setEditingAddressId(null);
             fetchAddresses(); // Refresh list
@@ -133,7 +133,7 @@ const Profile = () => {
     const deleteAddress = async (id) => {
         if(window.confirm("Delete this address?")) {
             try {
-                await axios.delete(`http://localhost:8080/api/users/address/${id}`);
+                await axios.delete(`https://166720c8-b530-49b2-b541-bf6a0cec22d8-prod.e1-us-east-azure.choreoapis.dev/greencart/greencart-backend/v1/api/users/address/${id}`);
                 fetchAddresses(); // Refresh list
             } catch (error) {
                 console.error(error);

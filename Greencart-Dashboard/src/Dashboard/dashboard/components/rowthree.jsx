@@ -27,7 +27,7 @@ const Rowthree = () => {
 
     const loadDashboardData = async () => {
         try {
-            const res = await axios.get("http://localhost:8080/api/dashboard/analytics");
+            const res = await axios.get("https://166720c8-b530-49b2-b541-bf6a0cec22d8-prod.e1-us-east-azure.choreoapis.dev/greencart/greencart-backend/v1/api/dashboard/analytics");
             setTransactions(res.data.recentTransactions || []);
             setVisitorSeries(res.data.visitorStats || [0, 0, 0, 0]);
         } catch (err) {
@@ -37,7 +37,7 @@ const Rowthree = () => {
 
     const loadTodos = async () => {
         try {
-            const res = await axios.get("http://localhost:8080/api/todos");
+            const res = await axios.get("https://166720c8-b530-49b2-b541-bf6a0cec22d8-prod.e1-us-east-azure.choreoapis.dev/greencart/greencart-backend/v1/api/todos");
             setTodos(res.data);
         } catch (err) {
             console.error("Failed to load todos", err);
@@ -48,7 +48,7 @@ const Rowthree = () => {
     const handleAddTodo = async () => {
         if (!newTask.trim()) return;
         try {
-            await axios.post("http://localhost:8080/api/todos", { taskName: newTask });
+            await axios.post("https://166720c8-b530-49b2-b541-bf6a0cec22d8-prod.e1-us-east-azure.choreoapis.dev/greencart/greencart-backend/v1/api/todos", { taskName: newTask });
             setNewTask("");
             loadTodos(); // Refresh list
         } catch (err) {
@@ -58,7 +58,7 @@ const Rowthree = () => {
 
     const handleToggleTodo = async (id) => {
         try {
-            await axios.put(`http://localhost:8080/api/todos/${id}`);
+            await axios.put(`https://166720c8-b530-49b2-b541-bf6a0cec22d8-prod.e1-us-east-azure.choreoapis.dev/greencart/greencart-backend/v1/api/todos/${id}`);
             loadTodos(); // Refresh list
         } catch (err) {
             console.error("Error toggling task", err);

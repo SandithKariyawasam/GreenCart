@@ -30,7 +30,7 @@ const Rowtwo = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/api/dashboard/analytics");
+        const res = await axios.get("https://166720c8-b530-49b2-b541-bf6a0cec22d8-prod.e1-us-east-azure.choreoapis.dev/greencart/greencart-backend/v1/api/dashboard/analytics");
 
         // 1. Update Table Data
         if (res.data.recentOrders) {
